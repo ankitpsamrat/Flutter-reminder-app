@@ -1,4 +1,5 @@
-import 'package:desktop_application/pages/Profile.dart';
+import 'package:desktop_application/pages/profile.dart';
+import 'package:desktop_application/utils/service/navigation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,10 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Desktop Application',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Profile(),
+      navigatorKey: NavigationService.navigatorKey,
+      debugShowCheckedModeBanner: false,
+      home: UserProfile(),
     );
   }
 }
