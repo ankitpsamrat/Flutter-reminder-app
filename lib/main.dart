@@ -1,5 +1,5 @@
-import 'package:desktop_application/pages/profile.dart';
-import 'package:desktop_application/utils/service/navigation.dart';
+import 'package:desktop_application/src/screens/profile.dart';
+import 'package:desktop_application/helpers/navigation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
