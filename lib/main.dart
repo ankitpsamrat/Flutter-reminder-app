@@ -1,4 +1,4 @@
-import 'package:desktop_application/src/screens/profile.dart';
+import 'package:desktop_application/src/layout.dart';
 import 'package:desktop_application/helpers/navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Desktop Application',
       navigatorKey: NavigationService.navigatorKey,
       debugShowCheckedModeBanner: false,
-      home: UserProfile(),
+      home: Layout(),
     );
   }
 }
