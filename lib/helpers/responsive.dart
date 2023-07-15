@@ -16,19 +16,19 @@ class AppUI {
 const int largeScreenSize = 1366;
 const int mediumScreenSize = 768;
 const int smallSceenSize = 360;
-// const int customScreenSize = 1100;
+const int customScreenSize = 1100;
 
 class ResponsiveWidget extends StatelessWidget {
   final Widget largeScreen;
   final Widget? mediumScreen;
   final Widget? smallScreen;
-  // final Widget customScreen;
+  final Widget? customScreen;
 
   const ResponsiveWidget({
     required this.largeScreen,
     this.mediumScreen,
     this.smallScreen,
-    // this.customScreen,
+    this.customScreen,
   });
 
   static bool isSmallScreen(BuildContext context) {
@@ -44,10 +44,10 @@ class ResponsiveWidget extends StatelessWidget {
     return MediaQuery.of(context).size.width > largeScreenSize;
   }
 
-  // static bool isCustomSize(BuildContext context) {
-  //   return MediaQuery.of(context).size.width <= customScreenSize &&
-  //       MediaQuery.of(context).size.width >= mediumScreenSize;
-  // }
+  static bool isCustomSize(BuildContext context) {
+    return MediaQuery.of(context).size.width <= customScreenSize &&
+        MediaQuery.of(context).size.width >= mediumScreenSize;
+  }
 
   @override
   Widget build(BuildContext context) {
