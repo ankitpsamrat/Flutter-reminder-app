@@ -1,7 +1,7 @@
-import 'package:desktop_application/web1/helpers/responsive.dart';
-import 'package:desktop_application/web1/src/screens/app_bar.dart';
-import 'package:desktop_application/web1/src/widgets/large_screen.dart';
-import 'package:desktop_application/web1/src/widgets/small_screen.dart';
+import 'package:desktop_application/helpers/responsive.dart';
+import 'package:desktop_application/src/screens/app_bar.dart';
+import 'package:desktop_application/src/widgets/large_screen.dart';
+import 'package:desktop_application/src/widgets/small_screen.dart';
 import 'package:flutter/material.dart';
 
 class Layout extends StatelessWidget {

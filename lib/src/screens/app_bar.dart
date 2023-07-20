@@ -1,6 +1,6 @@
-import 'package:desktop_application/web1/constants/colors.dart';
-import 'package:desktop_application/web1/helpers/responsive.dart';
-import 'package:desktop_application/web1/src/widgets/custom_text.dart';
+import 'package:desktop_application/constants/colors.dart';
+import 'package:desktop_application/helpers/responsive.dart';
+import 'package:desktop_application/src/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 // AppBar customAppBar(BuildContext context, GlobalKey<ScaffoldState> key) =>

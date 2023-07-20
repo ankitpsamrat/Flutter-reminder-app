@@ -1,4 +1,4 @@
-import 'package:desktop_application/web1/helpers/responsive.dart';
+import 'package:desktop_application/helpers/responsive.dart';
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatelessWidget {

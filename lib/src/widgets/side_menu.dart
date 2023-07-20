@@ -1,9 +1,9 @@
-import 'package:desktop_application/web1/constants/colors.dart';
-import 'package:desktop_application/web1/constants/controllers.dart';
-import 'package:desktop_application/web1/helpers/responsive.dart';
-import 'package:desktop_application/web1/routing/routes.dart';
-import 'package:desktop_application/web1/src/widgets/custom_text.dart';
-import 'package:desktop_application/web1/src/widgets/side_menu_item.dart';
+import 'package:desktop_application/constants/colors.dart';
+import 'package:desktop_application/constants/controllers.dart';
+import 'package:desktop_application/helpers/responsive.dart';
+import 'package:desktop_application/routing/routes.dart';
+import 'package:desktop_application/src/widgets/custom_text.dart';
+import 'package:desktop_application/src/widgets/side_menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
