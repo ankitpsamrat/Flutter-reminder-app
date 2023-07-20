@@ -1,5 +1,5 @@
-import 'package:desktop_application/constants/colors.dart';
-import 'package:desktop_application/constants/controllers.dart';
+import 'package:desktop_application/web1/constants/colors.dart';
+import 'package:desktop_application/web1/constants/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

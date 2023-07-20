@@ -1,4 +1,4 @@
-import 'package:desktop_application/helpers/navigation.dart';
+import 'package:desktop_application/web1/helpers/navigation.dart';
 import 'package:flutter/widgets.dart';
 
 class AppUI {

@@ -1,6 +1,6 @@
-import 'package:desktop_application/helpers/responsive.dart';
-import 'package:desktop_application/src/widgets/horizontal_menu_item_copy.dart';
-import 'package:desktop_application/src/widgets/vertical_menu_item.dart';
+import 'package:desktop_application/web1/helpers/responsive.dart';
+import 'package:desktop_application/web1/src/widgets/horizontal_menu_item_copy.dart';
+import 'package:desktop_application/web1/src/widgets/vertical_menu_item.dart';
 import 'package:flutter/material.dart';
 
 class SideMenuItem extends StatelessWidget {
