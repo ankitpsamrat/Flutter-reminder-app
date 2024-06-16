@@ -1,4 +1,3 @@
-import 'package:desktop_application/src/layout.dart';
 import 'package:desktop_application/helpers/navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Desktop Application',
-      navigatorKey: NavigationService.navigatorKey,
+      title: 'Reminder App',
+      navigatorKey: Navigation.navigatorKey,
       debugShowCheckedModeBanner: false,
-      home: Layout(),
     );
   }
 }

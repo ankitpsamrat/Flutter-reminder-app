@@ -3,65 +3,10 @@ import 'package:flutter/widgets.dart';
 
 class AppUI {
   static double dh =
-      MediaQuery.of(NavigationService.navigatorKey.currentContext!)
-              .size
-              .height /
-          100;
+      MediaQuery.of(Navigation.navigatorKey.currentContext!).size.height / 100;
 
   static double dw =
-      MediaQuery.of(NavigationService.navigatorKey.currentContext!).size.width /
-          100;
-}
+      MediaQuery.of(Navigation.navigatorKey.currentContext!).size.width / 100;
 
-const int largeScreenSize = 1366;
-const int mediumScreenSize = 768;
-const int smallSceenSize = 360;
-const int customScreenSize = 1100;
-
-class ResponsiveWidget extends StatelessWidget {
-  final Widget largeScreen;
-  final Widget? mediumScreen;
-  final Widget? smallScreen;
-  final Widget? customScreen;
-
-  const ResponsiveWidget({
-    required this.largeScreen,
-    this.mediumScreen,
-    this.smallScreen,
-    this.customScreen,
-  });
-
-  static bool isSmallScreen(BuildContext context) {
-    return MediaQuery.of(context).size.width < mediumScreenSize;
-  }
-
-  static bool isMediumScreen(BuildContext context) {
-    return MediaQuery.of(context).size.width >= mediumScreenSize &&
-        MediaQuery.of(context).size.width < largeScreenSize;
-  }
-
-  static bool isLargeScreen(BuildContext context) {
-    return MediaQuery.of(context).size.width > largeScreenSize;
-  }
-
-  static bool isCustomSize(BuildContext context) {
-    return MediaQuery.of(context).size.width <= customScreenSize &&
-        MediaQuery.of(context).size.width >= mediumScreenSize;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth >= largeScreenSize) {
-          return largeScreen;
-        } else if (constraints.maxWidth < largeScreenSize &&
-            constraints.maxWidth >= mediumScreenSize) {
-          return mediumScreen ?? largeScreen;
-        } else {
-          return smallScreen ?? largeScreen;
-        }
-      },
-    );
-  }
+  static double sp = dw / 3.0;
 }
