@@ -1,4 +1,5 @@
 import 'package:desktop_application/helpers/navigation.dart';
+import 'package:desktop_application/src/auth/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Reminder App',
       navigatorKey: Navigation.navigatorKey,
       debugShowCheckedModeBanner: false,
+      home: const LoginScreen(),
     );
   }
 }
