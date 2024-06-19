@@ -1,9 +1,8 @@
 import 'package:desktop_application/constants/colors.dart';
 import 'package:desktop_application/helpers/navigation.dart';
 import 'package:desktop_application/helpers/responsive.dart';
-import 'package:desktop_application/src/auth/screens/signup_screen.dart';
+import 'package:desktop_application/src/auth/screens/forgot_password.dart';
 import 'package:desktop_application/src/home/screens/home_screen.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -48,7 +47,13 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigation.navigatorKey.currentState!.push(
+                  MaterialPageRoute(
+                    builder: (context) => const ForgotPassword(),
+                  ),
+                );
+              },
               child: Text(
                 'Forgot password?',
                 style: TextStyle(
@@ -83,34 +88,34 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(
-                  fontSize: 12 * AppUI.sp,
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w600,
-                ),
-                children: [
-                  const TextSpan(text: 'Don\'t have an account?  '),
-                  TextSpan(
-                    text: 'Sign up',
-                    style: const TextStyle(
-                      color: AppColors.active,
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.active,
-                    ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigation.navigatorKey.currentState!.push(
-                          MaterialPageRoute(
-                            builder: (context) => const SignUpScreen(),
-                          ),
-                        );
-                      },
-                  ),
-                ],
-              ),
-            ),
+            // RichText(
+            //   text: TextSpan(
+            //     style: TextStyle(
+            //       fontSize: 12 * AppUI.sp,
+            //       color: AppColors.black,
+            //       fontWeight: FontWeight.w600,
+            //     ),
+            //     children: [
+            //       const TextSpan(text: 'Don\'t have an account?  '),
+            //       TextSpan(
+            //         text: 'Sign up',
+            //         style: const TextStyle(
+            //           color: AppColors.active,
+            //           decoration: TextDecoration.underline,
+            //           decorationColor: AppColors.active,
+            //         ),
+            //         recognizer: TapGestureRecognizer()
+            //           ..onTap = () {
+            //             Navigation.navigatorKey.currentState!.push(
+            //               MaterialPageRoute(
+            //                 builder: (context) => const SignUpScreen(),
+            //               ),
+            //             );
+            //           },
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
