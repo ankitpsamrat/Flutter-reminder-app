@@ -1,6 +1,6 @@
 import 'package:desktop_application/constants/colors.dart';
 import 'package:desktop_application/helpers/responsive.dart';
-import 'package:desktop_application/src/common/confirmation_popup.dart';
+import 'package:desktop_application/src/common/custom_popup.dart';
 import 'package:flutter/material.dart';
 
 class AddReminders extends StatefulWidget {
@@ -31,7 +31,7 @@ class _AddRemindersState extends State<AddReminders> {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return const ConfirmationPopUp();
+                    return const CustomPopUp();
                   },
                 );
               },

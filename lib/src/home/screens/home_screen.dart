@@ -1,5 +1,6 @@
 import 'package:desktop_application/helpers/navigation.dart';
 import 'package:desktop_application/helpers/responsive.dart';
+import 'package:desktop_application/src/notification/screens/notification_view.dart';
 import 'package:desktop_application/src/reminders/screens/add_reminder.dart';
 import 'package:desktop_application/src/reminders/screens/reminders_list.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,13 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 3 * AppUI.dw),
             child: IconButton.filledTonal(
-              onPressed: () {},
+              onPressed: () {
+                Navigation.navigatorKey.currentState!.push(
+                  MaterialPageRoute(
+                    builder: (context) => const NotificationView(),
+                  ),
+                );
+              },
               icon: const Icon(Icons.notifications),
             ),
           ),
