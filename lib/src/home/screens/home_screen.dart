@@ -1,3 +1,4 @@
+import 'package:desktop_application/constants/enums.dart';
 import 'package:desktop_application/helpers/navigation.dart';
 import 'package:desktop_application/helpers/responsive.dart';
 import 'package:desktop_application/src/notification/screens/notification_view.dart';
@@ -19,7 +20,7 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {
               Navigation.navigatorKey.currentState!.push(
                 MaterialPageRoute(
-                  builder: (context) => const AddReminders(),
+                  builder: (context) => const AddReminders(screen: Screen.home),
                 ),
               );
             },

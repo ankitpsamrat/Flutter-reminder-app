@@ -1,4 +1,6 @@
+import 'package:desktop_application/constants/enums.dart';
 import 'package:desktop_application/helpers/navigation.dart';
+import 'package:desktop_application/helpers/responsive.dart';
 import 'package:desktop_application/src/reminders/screens/add_reminder.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +16,15 @@ class RemindersList extends StatelessWidget {
           leading: Text('$index'),
           title: Text('Your Policy/task/bill $index'),
           subtitle: Text('Due date: ${DateTime.now()}'),
-          trailing: const Icon(Icons.arrow_forward_ios),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            size: 4 * AppUI.dw,
+          ),
           onTap: () {
             Navigation.navigatorKey.currentState!.push(
               MaterialPageRoute(
-                builder: (context) => const AddReminders(),
+                builder: (context) =>
+                    const AddReminders(screen: Screen.addReminder),
               ),
             );
           },

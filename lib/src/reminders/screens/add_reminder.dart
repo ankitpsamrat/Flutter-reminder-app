@@ -1,10 +1,19 @@
 import 'package:desktop_application/constants/colors.dart';
+import 'package:desktop_application/constants/enums.dart';
+import 'package:desktop_application/helpers/navigation.dart';
 import 'package:desktop_application/helpers/responsive.dart';
+import 'package:desktop_application/src/common/custom_button.dart';
 import 'package:desktop_application/src/common/custom_popup.dart';
+import 'package:desktop_application/src/common/custom_text_field.dart';
+import 'package:desktop_application/src/reminders/screens/receiver_list.dart';
+import 'package:desktop_application/src/reminders/screens/reminder_form.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AddReminders extends StatefulWidget {
-  const AddReminders({super.key});
+  final Screen screen;
+
+  const AddReminders({super.key, required this.screen});
 
   @override
   State<AddReminders> createState() => _AddRemindersState();
@@ -13,29 +22,44 @@ class AddReminders extends StatefulWidget {
 class _AddRemindersState extends State<AddReminders> {
   //
 
-  bool _selectedValue = false;
+  final _createDateController = TextEditingController();
+  final _maturityDateController = TextEditingController();
+  final _premiumDateController = TextEditingController();
+
+  @override
+  void dispose() {
+    _createDateController.dispose();
+    _maturityDateController.dispose();
+    _premiumDateController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          (widget.screen == Screen.home) ? 'Add reminder' : 'Edit reminder',
+        ),
         actions: [
-          // IconButton.filledTonal(
-          //   onPressed: () {},
-          //   icon: const Icon(Icons.edit),
-          // ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 3 * AppUI.dw),
-            child: IconButton.filledTonal(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const CustomPopUp();
-                  },
-                );
-              },
-              icon: const Icon(Icons.delete),
+          Visibility(
+            visible: (widget.screen != Screen.home),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 3 * AppUI.dw),
+              child: IconButton.filledTonal(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const CustomPopUp(
+                        title: 'Are you sure to delete this reminder!',
+                      );
+                    },
+                  );
+                },
+                icon: const Icon(Icons.delete),
+              ),
             ),
           ),
         ],
@@ -46,208 +70,161 @@ class _AddRemindersState extends State<AddReminders> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 3 * AppUI.dh),
-                child: TextFormField(
-                  textInputAction: TextInputAction.next,
-                  style: TextStyle(fontSize: 12 * AppUI.sp),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    hintText: 'Policy name',
+                padding: EdgeInsets.symmetric(vertical: 2 * AppUI.dh),
+                child: const CustomTextField(
+                  hintText: 'Policy name',
+                ),
+              ),
+              CustomTextField(
+                controller: _createDateController,
+                readOnly: true,
+                hintText: 'Created date',
+                suffixIcon: _createDateController.text.isEmpty
+                    ? IconButton(
+                        onPressed: () async {
+                          final DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(3000),
+                          );
+
+                          if (pickedDate != null) {
+                            String formattedDate =
+                                DateFormat('dd-MM-yyyy').format(pickedDate);
+
+                            setState(() {
+                              _createDateController.text = formattedDate;
+                            });
+                          }
+                        },
+                        icon: const Icon(Icons.calendar_month),
+                      )
+                    : IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _createDateController.clear();
+                          });
+                        },
+                        icon: const Icon(Icons.delete),
+                      ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 2 * AppUI.dh),
+                child: CustomTextField(
+                  controller: _maturityDateController,
+                  readOnly: true,
+                  hintText: 'Maturity date',
+                  suffixIcon: _maturityDateController.text.isEmpty
+                      ? IconButton(
+                          onPressed: () async {
+                            final DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(2000),
+                              lastDate: DateTime(3000),
+                            );
+
+                            if (pickedDate != null) {
+                              final String formattedDate =
+                                  DateFormat('dd-MM-yyyy').format(pickedDate);
+
+                              setState(() {
+                                _maturityDateController.text = formattedDate;
+                              });
+                            }
+                          },
+                          icon: const Icon(Icons.calendar_month),
+                        )
+                      : IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _maturityDateController.clear();
+                            });
+                          },
+                          icon: const Icon(Icons.delete),
+                        ),
+                ),
+              ),
+              const CustomTextField(
+                hintText: 'Policy amount',
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 2 * AppUI.dh),
+                child: const CustomTextField(
+                  hintText: 'Premium amount',
+                ),
+              ),
+              CustomTextField(
+                controller: _premiumDateController,
+                readOnly: true,
+                hintText: 'Premium due date',
+                suffixIcon: _premiumDateController.text.isEmpty
+                    ? IconButton(
+                        onPressed: () async {
+                          final DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(3000),
+                          );
+
+                          if (pickedDate != null) {
+                            final String formattedDate =
+                                DateFormat('dd-MM-yyyy').format(pickedDate);
+
+                            setState(() {
+                              _premiumDateController.text = formattedDate;
+                            });
+                          }
+                        },
+                        icon: const Icon(Icons.calendar_month),
+                      )
+                    : IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _premiumDateController.clear();
+                          });
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                          color: AppColors.black,
+                        ),
+                      ),
+              ),
+              Visibility(
+                visible: (widget.screen != Screen.home),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 2 * AppUI.dh),
+                  child: const ReceiverList(),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigation.navigatorKey.currentState!.push(
+                    MaterialPageRoute(
+                      builder: (context) => const ReminderForm(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Set alert for other',
+                  style: TextStyle(
+                    fontSize: 12 * AppUI.sp,
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 3 * AppUI.dh),
-                child: TextFormField(
-                  textInputAction: TextInputAction.next,
-                  style: TextStyle(fontSize: 12 * AppUI.sp),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    hintText: 'Created date',
-                  ),
+                padding: EdgeInsets.only(
+                  top: 4 * AppUI.dh,
+                  bottom: 2 * AppUI.dh,
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 3 * AppUI.dh),
-                child: TextFormField(
-                  textInputAction: TextInputAction.next,
-                  style: TextStyle(fontSize: 12 * AppUI.sp),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    hintText: 'Maturity date',
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 3 * AppUI.dh),
-                child: TextFormField(
-                  textInputAction: TextInputAction.next,
-                  style: TextStyle(fontSize: 12 * AppUI.sp),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    hintText: 'Policy amount',
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 3 * AppUI.dh),
-                child: TextFormField(
-                  textInputAction: TextInputAction.next,
-                  style: TextStyle(fontSize: 12 * AppUI.sp),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    hintText: 'Premium amount',
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 3 * AppUI.dh),
-                child: TextFormField(
-                  textInputAction: TextInputAction.next,
-                  style: TextStyle(fontSize: 12 * AppUI.sp),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    hintText: 'Premium due date',
-                  ),
-                ),
-              ),
-              SizedBox(height: 2 * AppUI.dh),
-              // ElevatedButton.icon(
-              //   onPressed: () {},
-              //   style: TextButton.styleFrom(
-              //     backgroundColor: AppColors.green,
-              //     foregroundColor: AppColors.white,
-              //   ),
-              //   icon: const Icon(Icons.file_copy),
-              //   label: Text(
-              //     'Attach doc',
-              //     style: TextStyle(
-              //       fontSize: 12 * AppUI.sp,
-              //       fontWeight: FontWeight.w700,
-              //     ),
-              //   ),
-              // ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Enable Whatsapp alert'),
-                titleTextStyle: TextStyle(
-                  fontSize: 12 * AppUI.sp,
-                  color: AppColors.black,
-                ),
-                trailing: Switch(
-                  value: _selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedValue = value;
-                    });
-                  },
-                ),
-              ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Enable email alert'),
-                titleTextStyle: TextStyle(
-                  fontSize: 12 * AppUI.sp,
-                  color: AppColors.black,
-                ),
-                trailing: Switch(
-                  value: _selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedValue = value;
-                    });
-                  },
-                ),
-              ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Enable sms alert'),
-                titleTextStyle: TextStyle(
-                  fontSize: 12 * AppUI.sp,
-                  color: AppColors.black,
-                ),
-                trailing: Switch(
-                  value: _selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedValue = value;
-                    });
-                  },
-                ),
-              ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Enable sms alert'),
-                titleTextStyle: TextStyle(
-                  fontSize: 12 * AppUI.sp,
-                  color: AppColors.black,
-                ),
-                trailing: Switch(
-                  value: _selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedValue = value;
-                    });
-                  },
-                ),
-              ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Enable sms alert'),
-                titleTextStyle: TextStyle(
-                  fontSize: 12 * AppUI.sp,
-                  color: AppColors.black,
-                ),
-                trailing: Switch(
-                  value: _selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedValue = value;
-                    });
-                  },
+                child: CustomButton(
+                  title: 'Submit',
+                  onTap: () {},
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: AppColors.white,
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.lightGrey,
-              blurRadius: 5,
-            ),
-          ],
-        ),
-        child: Container(
-          height: 6 * AppUI.dh,
-          margin: EdgeInsets.fromLTRB(
-            3 * AppUI.dw,
-            1.5 * AppUI.dh,
-            3 * AppUI.dw,
-            4 * AppUI.dh,
-          ),
-          child: ElevatedButton(
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              backgroundColor: AppColors.blue,
-              foregroundColor: AppColors.white,
-            ),
-            child: Text(
-              'Submit',
-              style: TextStyle(
-                fontSize: 15 * AppUI.sp,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
           ),
         ),
       ),
