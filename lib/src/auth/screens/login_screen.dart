@@ -1,14 +1,38 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:desktop_application/constants/colors.dart';
 import 'package:desktop_application/helpers/navigation.dart';
 import 'package:desktop_application/helpers/responsive.dart';
 import 'package:desktop_application/src/auth/screens/forgot_password.dart';
 import 'package:desktop_application/src/common/custom_button.dart';
 import 'package:desktop_application/src/common/custom_text_field.dart';
-import 'package:desktop_application/src/home/screens/home_screen.dart';
-import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+
+  Future<void> _fetchData() async {
+    final Uri url = Uri.parse('http://166.0.242.94:80/api/clients');
+    final String basicAuth =
+        'Basic ${base64Encode(utf8.encode('apikey:meusam12#'))}';
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': basicAuth,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      debugPrint(data);
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +88,12 @@ class LoginScreen extends StatelessWidget {
                   title: 'Login',
                   bgColor: AppColors.active,
                   onTap: () {
-                    Navigation.navigatorKey.currentState!.push(
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
-                    );
+                    _fetchData();
+                    // Navigation.navigatorKey.currentState!.push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const HomeScreen(),
+                    //   ),
+                    // );
                   },
                 ),
               ),
