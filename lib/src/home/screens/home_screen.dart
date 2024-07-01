@@ -1,26 +1,38 @@
-import 'package:desktop_application/constants/enums.dart';
-import 'package:desktop_application/helpers/navigation.dart';
-import 'package:desktop_application/helpers/responsive.dart';
-import 'package:desktop_application/src/notification/screens/notification_view.dart';
-import 'package:desktop_application/src/reminders/screens/add_reminder.dart';
-import 'package:desktop_application/src/reminders/screens/reminders_list.dart';
 import 'package:flutter/material.dart';
 
+import 'package:desktop_application/constants/colors.dart';
+import 'package:desktop_application/helpers/navigation.dart';
+import 'package:desktop_application/helpers/responsive.dart';
+import 'package:desktop_application/src/auth/models/user_info_model.dart';
+import 'package:desktop_application/src/notification/screens/notification_view.dart';
+import 'package:desktop_application/src/policy/screens/add_policy.dart';
+import 'package:desktop_application/src/policy/screens/user_policies.dart';
+
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final UserInfoModel userInfo;
+
+  const HomeScreen({super.key, required this.userInfo});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ankit'),
+        title: Text(
+          'Hey ${userInfo.firstName}',
+          style: TextStyle(
+            fontSize: 18 * AppUI.sp,
+            color: AppColors.active,
+            fontWeight: FontWeight.w500,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
         automaticallyImplyLeading: false,
         actions: [
           IconButton.filledTonal(
             onPressed: () {
               Navigation.navigatorKey.currentState!.push(
                 MaterialPageRoute(
-                  builder: (context) => const AddReminders(screen: Screen.home),
+                  builder: (context) => const AddPolicy(),
                 ),
               );
             },
@@ -41,7 +53,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
+      body: Center(
         // child: ElevatedButton.icon(
         //   onPressed: () {},
         //   style: TextButton.styleFrom(
@@ -56,7 +68,10 @@ class HomeScreen extends StatelessWidget {
         //     ),
         //   ),
         // ),
-        child: RemindersList(),
+        child: UserPolicies(
+          clientID: userInfo.clientId,
+          userID: userInfo.userId,
+        ),
       ),
     );
   }

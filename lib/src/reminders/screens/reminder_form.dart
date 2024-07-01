@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+
 import 'package:desktop_application/constants/colors.dart';
 import 'package:desktop_application/helpers/responsive.dart';
 import 'package:desktop_application/src/common/custom_button.dart';
 import 'package:desktop_application/src/common/custom_text_field.dart';
-import 'package:flutter/material.dart';
 
 class ReminderForm extends StatelessWidget {
   const ReminderForm({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class ReminderForm extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Alert settings'),
+        title: const Text('Receiver info'),
       ),
       body: SingleChildScrollView(
         reverse: true,

@@ -1,9 +1,12 @@
-import 'package:desktop_application/helpers/responsive.dart';
-import 'package:desktop_application/src/common/custom_popup.dart';
 import 'package:flutter/material.dart';
 
+import 'package:desktop_application/helpers/responsive.dart';
+import 'package:desktop_application/src/policy/models/user_policy_model.dart';
+
 class ReceiverList extends StatelessWidget {
-  const ReceiverList({Key? key}) : super(key: key);
+  final UserPolicyModel policyInfo;
+
+  const ReceiverList({super.key, required this.policyInfo});
 
   @override
   Widget build(BuildContext context) {
@@ -17,37 +20,26 @@ class ReceiverList extends StatelessWidget {
           ),
         ),
         ListView.builder(
-          itemCount: 2,
+          itemCount: policyInfo.reminderDTOs.length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
+            final ReminderDtoModel reminderDto = policyInfo.reminderDTOs[index];
+
             return Container(
               margin: EdgeInsets.only(top: 1.5 * AppUI.dh),
+              padding: EdgeInsets.all(2 * AppUI.dw),
               decoration: BoxDecoration(
                 border: Border.all(),
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: ListTile(
-                title: Text(
-                  index != 1 ? 'ankit.test@gmail.com' : '9877452309',
-                  style: TextStyle(fontSize: 12 * AppUI.sp),
-                ),
-                trailing: IconButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const CustomPopUp(
-                          title:
-                              'Are you sure to delete this receiver details!',
-                        );
-                      },
-                    );
-                  },
-                  icon: const Icon(Icons.delete),
-                ),
-                dense: true,
-                contentPadding: EdgeInsets.only(left: 4 * AppUI.dw),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Name: ${reminderDto.contactName}'),
+                  Text('Phone: ${reminderDto.contactPhone}'),
+                  Text('Email: ${reminderDto.email}'),
+                ],
               ),
             );
           },

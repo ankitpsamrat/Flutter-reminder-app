@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 
 class CustomPopUp extends StatelessWidget {
   final String title;
+  final VoidCallback? primaryAction;
 
-  const CustomPopUp({super.key, required this.title});
+  const CustomPopUp({super.key, required this.title, this.primaryAction});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +33,7 @@ class CustomPopUp extends StatelessWidget {
             ),
             SizedBox(width: 8 * AppUI.dw),
             ElevatedButton(
-              onPressed: () {
-                Navigation.navigatorKey.currentState!.pop();
-              },
+              onPressed: primaryAction,
               style: TextButton.styleFrom(
                 backgroundColor: AppColors.blue,
                 foregroundColor: AppColors.white,

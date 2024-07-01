@@ -1,10 +1,10 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+
 import 'package:desktop_application/constants/colors.dart';
 import 'package:desktop_application/helpers/navigation.dart';
 import 'package:desktop_application/helpers/responsive.dart';
 import 'package:desktop_application/src/auth/screens/login_screen.dart';
-import 'package:desktop_application/src/home/screens/home_screen.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -52,11 +52,11 @@ class SignUpScreen extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigation.navigatorKey.currentState!.push(
-                    MaterialPageRoute(
-                      builder: (context) => const HomeScreen(),
-                    ),
-                  );
+                  // Navigation.navigatorKey.currentState!.push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const HomeScreen(),
+                  //   ),
+                  // );
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: AppColors.active,
